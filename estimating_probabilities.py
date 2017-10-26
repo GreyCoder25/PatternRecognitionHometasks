@@ -36,4 +36,4 @@ def estimate_probabilities(file_name, letters):
         for pair in p_pair:
             p_pair[pair] /= pair_total
 
-    
+
