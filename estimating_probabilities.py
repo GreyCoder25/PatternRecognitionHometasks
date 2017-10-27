@@ -1,6 +1,3 @@
-import numpy as np
-
-
 def estimate_probabilities(file_name, letters):
 
     N = len(letters)
@@ -36,4 +33,9 @@ def estimate_probabilities(file_name, letters):
         for pair in p_pair:
             p_pair[pair] /= pair_total
 
+        for l1 in letters:
+            for l2 in letters:
+                if p[l1] != 0:
+                    p_pair[l1 + l2] /= p[l1]
 
+        return p, p_pair
