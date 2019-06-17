@@ -38,6 +38,7 @@ def estimate_g(file_name, letters):
 
 
 def calculate_g_(g, letters):
+    '''Returns matrix that represents ability to do a jump from one state to another.'''
     states = '_' + letters
     g_ = {}
     for a in states:
@@ -54,6 +55,9 @@ def calculate_g_(g, letters):
 
 
 def calculate_g_star(g_, letters):
+    '''Calculate matrix of the smallest number of transitions (acts of generating a symbol) to get from
+    one state to another.
+    '''
     states = '_' + letters
     g_star = {}
     for a in states:
@@ -79,6 +83,12 @@ def init_costs(letters):
 
 
 def preprocess_costs(costs, letters):
+    '''To get the lowest cost for all operations Floyd-Warshell algorithm is used.
+    1) Add #-symbol and replace in(s) to ch(#, s) and del(s) to ch(s, #);
+    2) Build the complete graph (edges between all pairs exist), where nodes are associated with symbols
+    and edges are associated with "ch(s1, s2)" operation. Weights of the edges are initial costs;
+    3) Use Floyd-Warshell algorithm to obtain the lowest cost for each pair of arguments for ch() operation.
+    '''
     letters = letters + '#'
     for k in letters:
         for i in letters:
@@ -87,10 +97,13 @@ def preprocess_costs(costs, letters):
 
 
 def levenshtein_dist(word, letters, g_star, g):
+    '''Calculates Levenshtein distance from word to automatic language.'''
     m = len(word)
     states = '_' + letters
-    f = [{k: 0 for k in states} for i in range(m + 1)]
-    f_ = [{k: 0 for k in states} for i in range(m + 1)]
+    f = [{k: np.inf for k in states} for i in range(m + 1)]
+    f_ = [{k: np.inf for k in states} for i in range(m + 1)]
+    f[0]['_'] = 0
+    f_[0]['_'] = 0
 
     for i in range(1, m + 1):
         for k in states:
@@ -130,6 +143,6 @@ if __name__ == '__main__':
     print(g_ua_)
     g_star_ua = calculate_g_star(g_ua_, UA_LETTERS)
     print(g_star_ua)
-    word = 'Ьььь'
+    word = 'взлететь'
     lev_dist = levenshtein_dist(word.lower(), UA_LETTERS, g_star_ua, g_ua)
     print('Levenshtein distance from word {} to Ukrainian language is {}'.format(word, lev_dist))
