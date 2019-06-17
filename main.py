@@ -1,15 +1,14 @@
-import estimating_probabilities as p_est
+from utils import estimate_g
 
 
 UA_LETTERS = set('абвгґдеєжзиіїйклмнопрстуфхцчшщьюя')
 RU_LETTERS = set('абвгдеёжзиыйклмнопрстуфхцчшщьъэюя')
 
-p_letter_ua, p_pair_ua = p_est.estimate_probabilities('ua_text.txt', UA_LETTERS)
-p_letter_ru, p_pair_ru = p_est.estimate_probabilities('ru_text.txt', RU_LETTERS)
+g_ua = estimate_g('ua_text.txt', UA_LETTERS)
+g_ru = estimate_g('ru_text.txt', RU_LETTERS)
 
 
 def recognize_language(word, p_lang1, p_letter_lang1, p_pair_lang1, p_lang2, p_letter_lang2, p_pair_lang2):
-
     LANG1 = 'Українська'
     LANG2 = 'Русский'
 
@@ -31,5 +30,4 @@ P_UA = 0.5
 P_RU = 0.5
 
 while True:
-
     recognize_language(input('Enter the word: '), P_UA, p_letter_ua, p_pair_ua, P_RU, p_letter_ru, p_pair_ru)
