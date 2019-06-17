@@ -1,4 +1,4 @@
-# Generalized labelling on chains
+# Levenshtein distance from word to automatic language
 
 ## About
 Input is a Russian or Ukrainian word. Program finds its Levenshtein distances to automatic language approximations of
