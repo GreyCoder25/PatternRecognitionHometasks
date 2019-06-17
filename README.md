@@ -2,7 +2,7 @@
 
 ## About
 Input is a Russian or Ukrainian word. Program finds its Levenshtein distances to automatic language approximations of
-Russian and Ukrainian languages and guesses the language of this word using these guesses.
+Russian and Ukrainian languages and guesses the language of this word using these distances.
 
 ## Requirements
 - numpy
